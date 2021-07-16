@@ -28,7 +28,7 @@ class CreateUserService {
       password: passwordHash,
     });
 
-    return user;
+    return classToPlain(user);
   }
 }
 

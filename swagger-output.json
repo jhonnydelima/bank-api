@@ -1,0 +1,244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bank API",
+    "description": "This is a simple Bank API",
+    "contact": {
+      "email": "lima.jhonny95@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Create a new user account",
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "description": "User information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "name": "John Doe",
+                "email": "john@doe.com",
+                "password": "1234"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "description": "Show a user profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "types": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/statements/deposit": {
+      "post": {
+        "tags": ["Statements"],
+        "description": "Make a deposit",
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "description": "Deposit information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              },
+              "example": {
+                "user_id": "2db0a339-25fd-40d4-90c0-a647948cf2d4",
+                "amount": 500
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "types": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "string"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/statements/withdraw": {
+      "post": {
+        "tags": ["Statements"],
+        "description": "Make a withdraw",
+        "parameters": [
+          {
+            "name": "info",
+            "in": "body",
+            "description": "Withdraw information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                }
+              },
+              "example": {
+                "user_id": "2db0a339-25fd-40d4-90c0-a647948cf2d4",
+                "amount": 200
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "types": "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "string"
+                    },
+                    "balance": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "400": {
+            "description": "Insufficient funds"
+          }
+        }
+      }
+    },
+    "/statements/balance/{user_id}": {
+      "get": {
+        "tags": ["Statements"],
+        "description": "Show the user account balance",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "balance": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  }
+}
