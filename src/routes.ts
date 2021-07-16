@@ -14,11 +14,11 @@ const getBalanceController = new GetBalanceController();
 
 // USERS
 router.post("/users", createUserController.handle);
-router.get("/users/:id", showUserProfileController.handle); // #swagger.consumes = ['application/xml']
+router.get("/users/:id", showUserProfileController.handle);
 
 // STATEMENTS
 router.post("/statements/deposit", createStatementController.handle);
 router.post("/statements/withdraw", createStatementController.handle);
-router.get("/statements/balance/:user_id", getBalanceController.handle); // #swagger.consumes = ['application/xml']
+router.get("/statements/balance/:user_id", getBalanceController.handle);
 
 export { router };
