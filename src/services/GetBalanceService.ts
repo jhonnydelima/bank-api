@@ -21,7 +21,7 @@ class GetBalanceService {
       throw new GetBalanceError();
     }
 
-    const balance = await this.statementRepository.getUserBalance(user_id);
+    const { balance } = await this.statementRepository.getUserBalance(user_id);
 
     return balance;
   }
